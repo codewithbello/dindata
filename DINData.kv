@@ -1,0 +1,275 @@
+#:import Window kivy.core.window.Window
+#:import sys sys
+<UI_layout>:
+	
+	BoxLayout:
+		orientation: 'vertical'
+		padding: 0, 0, 0, dp(10)
+		canvas.before:
+			Color:
+			    rgba: .8, .8, .82, 1
+			Rectangle:
+			    size: self.size
+			    pos: self.pos
+		# Header Banner
+		spacing:dp(25)
+		BoxLayout:
+			
+	        size_hint_y: None
+	        height: dp(60)
+	        # elevation: 9
+	        pos_hint: {'top': 1}
+	        canvas.before:
+	            Color:
+	                rgba: 4/255, 37/255, 54/255, 1 #.18, .28, .32, 1
+	            Rectangle:
+	                size: self.size
+	                pos: self.pos
+	        Label:
+	            id: header_title
+	            text: 'DINDATA CLEANER'
+	            font_size: dp(40)
+	            bold: True
+	            
+	            color: .8, .8, .82, 1
+	            # size_hint_x: None
+	            # width: dp(100)
+	            pos_hint:{'center_x':.5, 'center_y':.5}
+	    #Data Directory
+	    BoxLayout:
+			size_hint_y: None
+			height: dp(50)
+			spacing:dp(10)
+			padding:dp(10)
+			Label:
+            	id:file_path
+            	text: ''
+            	bold: True
+                # theme_text_color: 'Custom'
+                color: 0,0,0,1    
+				canvas.before:
+					Color:
+						rgba: 1, 1, 1, 1
+					RoundedRectangle:
+						size: self.size
+						pos: self.pos
+						radius: [dp(4)]
+					Color:
+						rgba: 34/255, 37/255, 54/255, 1#.18, .28, .32, 1
+					Line:
+						width: dp(1)
+						rounded_rectangle: (self.x, self.y, self.width, self.height, dp(4))
+
+            Button:
+				text: 'Browse'
+				size_hint_x: None 
+				width: dp(100)
+				bold: True
+				background_color:(34/255, 37/255, 54/255, 1)
+				on_release: root.choose_file()
+		
+        #Date Entry    
+		BoxLayout:
+			orientation: 'vertical'
+			size_hint_y: None
+			height: dp(120)
+			canvas.before:
+	            Color:
+	                rgba: 4/255, 37/255, 54/255, 1 #.18, .28, .32, 1
+	            Rectangle:
+	                size: self.size
+	                pos: self.pos
+			spacing: dp(10)
+			padding:dp(10)
+		#----------------------- Start Date, End Date and CS Score Label sections -------------------------------
+			BoxLayout:
+				orientation: 'vertical'
+				size_hint_y: .5
+				# padding:dp(20)
+
+		# GridLayout:
+		# 	cols:1
+		# 	rows:2
+				GridLayout:
+					cols: 3
+					rows:1
+			
+					Label:
+						text: "Start Date"
+						bold: True
+						halign: "center"
+						valign: "middle"
+					Label:
+						text: "End Date"
+						bold: True
+						halign: "center"
+						valign: "middle"
+					Label:
+						text: "CS Score"
+						bold: True
+						halign: "center"
+						valign: "middle"
+			
+# #----------------------- Start Date, End Date and CS Score input sections -------------------------------
+            BoxLayout:
+				orientation: 'vertical'
+				size_hint_y: .5
+				GridLayout:
+					cols:3
+					rows:1
+					spacing:dp(20)
+					TextInput:
+						id: Start_Date
+						canvas.after:
+							Color:
+								rgba: 0.69, 0.69, 0.69, 1
+						hint_text: "YYYY-MM-DD"
+						halign: "center"
+						border: 5, 5, 5, 5
+						padding_y: dp(14),0
+						multiline: False
+						write_tab: False
+						valign: "middle"
+						size_hint: .8, None
+						height: "50"
+						pos_hint_y: "center"
+						on_text_validate: root.foo()
+	#                   
+
+					TextInput:
+						id: End_Date
+						canvas.after:
+							Color:
+								rgba: 0.69, 0.69, 0.69, 1
+						hint_text: "YYYY-MM-DD"
+						write_tab: False
+						halign: "center"
+						padding_y: dp(14),0
+						multiline: False
+						write_tab: False
+						valign: "middle"
+						size_hint: .8, None
+						height: "50"
+						pos_hint_y: "center"
+
+						on_text_validate: root.foo()
+	#
+					TextInput:
+						id: CS_input
+						hint_text: "0-100"
+						canvas.after:
+							Color:
+								rgba: 0.69, 0.69, 0.69, 1
+						halign: "center"
+						border: 5, 5, 5, 5
+						padding_y: dp(14),0
+						multiline: False
+						write_tab: False
+						valign: "middle"
+						input_filter: "int"
+						on_focus: True
+						size_hint: .8, None
+						height: "50"
+						pos_hint_y: "center"
+						on_text_validate: root.foo()
+
+			Widget:
+		# Display Terminal
+		BoxLayout:
+			orientation: 'vertical'
+			size_hint_y: None
+			height: dp(120)
+			canvas.before:
+	            Color:
+	                rgba: 4/255, 37/255, 54/255, 1 #.18, .28, .32, 1
+	            Rectangle:
+	                size: self.size
+	                pos: self.pos
+		
+			padding:dp(10)
+			ScrollView:
+			    bar_width: dp(10)
+			    scroll_type: ['bars']
+                BoxLayout:
+                    size_hint_x:.9
+                    orientation:'vertical'
+                    spacing: dp(10)
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    MDLabel:
+                        text: '[Display Terminal]'
+                        size_hint_y: None
+                        height: dp(20)
+                        color: 0,1,0,1 # Change to Green
+
+                    MDLabel:
+                        id:Terminal_Line_1
+                        text: ''
+                        markup: True
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+
+		BoxLayout:
+			size_hint_y: None
+			height:dp(40)
+			spacing: dp(20)
+
+			Widget:
+
+			Button:
+				text: 'Run'
+				size_hint_x: None
+				width: dp(100)
+				bold: True
+				background_color:(34/255, 37/255, 54/255, 1)
+				pos_hint: {'center_x':  .5}
+				on_release: root.run_code()
+				
+
+			Button:
+				text: 'Clear'
+				size_hint_x: None
+				width: dp(100)
+				bold: True
+				background_color:(34/255, 37/255, 54/255, 1)
+				pos_hint: {'center_x':  .5}
+				on_release: root.clear()
+
+			Widget:
+
+    MDSpinner:
+        id: spinner
+        size_hint: None, None
+        size: dp(25), dp(25)
+        pos_hint: {'right': .97, 'top': .97}
+        active: False
+        color: .8, .8, .82, 1
+
+    MDIconButton:
+        icon: 'information'
+        color: .8, .8, .82, 1
+        pos_hint: {'right': 1, 'top': .115}
+        on_release: root.open_info()
+
+
+<InfoCard>:
+    Button:
+        background_color: 0, 0, 0, .6
+        on_release: Window.remove_widget(root)
+
+    BoxLayout:
+        size_hint: .65, .25
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        canvas.before:
+            Color:
+                rgba: 4/255, 37/255, 54/255, 1
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius: [dp(5)]
+        MDLabel:
+            halign: 'center'
+            color: 1, 1, 1, 1
+            text: 'Upper Atmospheric Research Laboratory\nDepartment of Physics, Faculty of Physical Science\nUniversity of Ilorin, Ilorin, Kwara State, Nigeria\n\n Email: bioyesaeed@gmail.com '
