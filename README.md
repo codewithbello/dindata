@@ -5,8 +5,8 @@ The software is to take care of missing days and filter data based on CS value o
 
 # DINData GUI Setup Download
 
-Download the Dindata exe GUI Setup for Windows machine from
-https://drive.google.com/drive/folders/1GvCgCsFFYGaa4UeNSDO5b8mkNYbvXvg4?usp=sharing
+Download the Dindata exe GUI Setup for Windows machine from Zendo
+10.5281/zenodo.17937258
 
 
 ### DINData GUI Software User’s Brief Guide
